@@ -14,3 +14,16 @@ shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v0iea")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Coyote_Time_Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.08
+one_shot = true
+
+[node name="Jump_Buffer_Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Coyote_Time_Timer" to="." method="_on_coyote_time_timer_timeout"]
