@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmonnxkwrua2d"]
+
+[ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="1_oluxs"]
+[ext_resource type="Script" uid="uid://cisyx71ccayxm" path="res://Scripts/poco_lama.gd" id="1_vkgpd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkgpd"]
+size = Vector2(20, 10)
+
+[node name="poco_lama" type="Node2D"]
+script = ExtResource("1_vkgpd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_vkgpd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, 3)
+scale = Vector2(0.15625, 0.046875)
+texture = ExtResource("1_oluxs")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
