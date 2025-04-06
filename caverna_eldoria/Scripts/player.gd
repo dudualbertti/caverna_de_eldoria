@@ -1,23 +1,34 @@
 extends CharacterBody2D
 
+const MAX_SPEED = 400.0
+var speed = MAX_SPEED
 
-var speed = 300.0
-var velocity_change_speed = 20
+var velocity_change_speed = 40
 
-var jump_velocity = -400
-var gravity = 10
+var jump_velocity = -500
+var gravity = 12
 
 var vertical_velocity = 0
 
 var jumping = false
 var can_jump = true
 
+var pressed_jump = false
+
+@export var max_jump_count = 1
+var jump_count = max_jump_count
+
 @onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
 @onready var coyote_time_timer: Timer = $Coyote_Time_Timer
 
+func Player():
+	pass
 
 func jump():
-	can_jump = false
+	if jump_count < 1:
+		can_jump = false
+	
+	jump_count -= 1
 	vertical_velocity = jump_velocity
 
 
@@ -31,10 +42,9 @@ func handle_jump_buffer(jump_press):
 		
 
 func handle_coyote_time():
-	if coyote_time_timer.is_stopped() and can_jump:
+	if coyote_time_timer.is_stopped() and can_jump and max_jump_count < 2:
 		coyote_time_timer.start()
 	
-	print(jump_buffer_timer.is_stopped())
 	
 func handle_vertical_movement():
 	
@@ -42,19 +52,22 @@ func handle_vertical_movement():
 	
 	if is_on_floor():
 		can_jump = true
+		jump_count = max_jump_count
+		pressed_jump = false
 		vertical_velocity = 0
 	else:
 		vertical_velocity += gravity
 		handle_coyote_time()
 	
-	if jump_press and can_jump:
+	if jump_press and can_jump and not pressed_jump:
+		pressed_jump = true
 		jump()
 	
 	handle_jump_buffer(jump_press)
 	
 	if Input.is_action_just_released("jump") and jumping:
+		pressed_jump = false
 		vertical_velocity = gravity
-
 	
 	jumping = velocity.y < 0 and not is_on_floor()
 	
