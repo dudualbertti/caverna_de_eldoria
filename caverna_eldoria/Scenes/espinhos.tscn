@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1ahvriq0mi4i"]
+
+[ext_resource type="Texture2D" uid="uid://uyq20e7ypxcm" path="res://Assets/espinhos.png" id="1_l8oyh"]
+[ext_resource type="Script" uid="uid://yqmhwnmulg0a" path="res://Scripts/espinhos.gd" id="1_xgxgw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03ssl"]
+atlas = ExtResource("1_l8oyh")
+region = Rect2(16, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgxgw"]
+atlas = ExtResource("1_l8oyh")
+region = Rect2(32, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvapu"]
+atlas = ExtResource("1_l8oyh")
+region = Rect2(0, 0, 16, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k1hro"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03ssl")
+}],
+"loop": true,
+"name": &"ativado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgxgw")
+}],
+"loop": true,
+"name": &"extendido",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvapu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ti6hq"]
+size = Vector2(16, 10)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xgxgw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_k1hro")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_ti6hq")
+
+[node name="AtivarTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DesativarTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="AtivarTimer" to="." method="_on_ativar_timer_timeout"]
+[connection signal="timeout" from="DesativarTimer" to="." method="_on_desativar_timer_timeout"]
