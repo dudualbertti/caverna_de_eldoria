@@ -3,10 +3,10 @@ extends CharacterBody2D
 const MAX_SPEED = 400.0
 var speed = MAX_SPEED
 
-var velocity_change_speed = 40
+var velocity_change_speed = 35
 
 var jump_velocity = -500
-var gravity = 12
+var gravity = 15
 
 var vertical_velocity = 0
 
@@ -21,8 +21,10 @@ var jump_count = max_jump_count
 @onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
 @onready var coyote_time_timer: Timer = $Coyote_Time_Timer
 
+
 func Player():
 	pass
+
 
 func jump():
 	if jump_count < 1:
