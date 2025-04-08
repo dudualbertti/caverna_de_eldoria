@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyol3mkxf5awu"]
+[gd_scene load_steps=11 format=3 uid="uid://dyol3mkxf5awu"]
 
 [ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bn6db8nxrw2wx" path="res://Scenes/player.tscn" id="2_8gbba"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://n64wnhxvm54y" path="res://Scenes/plataforma_quebrar.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cptdsd35eeueu" path="res://Scenes/plataforma_movel.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d1ahvriq0mi4i" path="res://Scenes/espinhos.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://5li1apa3xwkt" path="res://Scenes/cristal.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://6tfsarkw8wka" path="res://Scenes/pedra_spawner.tscn" id="8_344ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
 size = Vector2(577, 20)
@@ -15,10 +17,8 @@ size = Vector2(164, 61)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_8gbba")]
-position = Vector2(120, -847)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(438, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(104.5, 244)
@@ -49,16 +49,33 @@ position = Vector2(743, 201.5)
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="poco_lama" parent="." instance=ExtResource("3_8gbba")]
-position = Vector2(1110, 225)
+position = Vector2(1548, 225)
 scale = Vector2(7.44002, 3.6)
 
 [node name="plataforma_quebrar" parent="." instance=ExtResource("4_jjvhh")]
-position = Vector2(520, 156)
+position = Vector2(958, 156)
 
 [node name="Plataforma" parent="." instance=ExtResource("5_kry3j")]
-position = Vector2(-363, 217)
+position = Vector2(75, 217)
 offset = Vector2(-100, 0)
 
 [node name="Node2D" parent="." instance=ExtResource("6_21xkr")]
-position = Vector2(192, 232)
+position = Vector2(630, 232)
 scale = Vector2(5.84, 3.76)
+
+[node name="cristal" parent="." instance=ExtResource("7_6bp64")]
+position = Vector2(290, 142)
+offset = Vector2(0, 15)
+duration = 1.0
+
+[node name="Player" parent="." instance=ExtResource("2_8gbba")]
+position = Vector2(419, 115)
+
+[node name="pedra_spawner" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(1531, -264)
+
+[node name="pedra_spawner2" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(638, -266)
+
+[node name="pedra_spawner3" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(81, -264)

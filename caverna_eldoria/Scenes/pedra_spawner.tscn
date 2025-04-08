@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://6tfsarkw8wka"]
+
+[ext_resource type="Script" uid="uid://blvaej2rys6wv" path="res://Scripts/pedra_spawner.gd" id="1_6ukkk"]
+[ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="2_vgr7y"]
+
+[node name="pedra_spawner" type="Node2D"]
+script = ExtResource("1_6ukkk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.430631, 0.484602)
+texture = ExtResource("2_vgr7y")
+
+[node name="DropPedraTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="DropPedraTimer" to="." method="_on_drop_pedra_timer_timeout"]
