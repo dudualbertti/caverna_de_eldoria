@@ -3,7 +3,7 @@ extends CharacterBody2D
 const MAX_SPEED = 400.0
 var speed = MAX_SPEED
 
-var velocity_change_speed = 35
+var velocity_change_speed = 40
 
 var jump_velocity = -500
 var gravity = 15
