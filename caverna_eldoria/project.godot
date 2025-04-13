@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="caverna_eldoria"
-run/main_scene="uid://dyol3mkxf5awu"
+run/main_scene="uid://bmcxj2h6mud4p"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
