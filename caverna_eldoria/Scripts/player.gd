@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 400.0
+const MAX_SPEED = 300.0
 var speed = MAX_SPEED
 
 var velocity_change_speed = 40
 
-var jump_velocity = -500
+var jump_velocity = -350
 var gravity = 15
 
 var vertical_velocity = 0
@@ -20,11 +20,14 @@ var jump_count = max_jump_count
 
 @onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
 @onready var coyote_time_timer: Timer = $Coyote_Time_Timer
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func Player():
 	pass
 
+func _ready() -> void:
+	animation.play("idle")
 
 func jump():
 	if jump_count < 1:
@@ -77,11 +80,28 @@ func handle_vertical_movement():
 
 func handle_horizontal_movement():
 	var direction := Input.get_axis("left", "right")
-
+	
+	if direction > 0:
+		animation.flip_h = false
+	elif direction < 0:
+		animation.flip_h = true
+	
 	velocity.x = move_toward(velocity.x, direction*speed, velocity_change_speed)
-
+	
 
 func _physics_process(delta: float) -> void:
+	
+	if abs(velocity.x) > 0:
+		animation.play("run")
+	else:
+		animation.play("idle")
+	
+	if not is_on_floor():
+		if jumping:
+			animation.play("jumping")
+		else:
+			animation.play("falling")
+		
 	
 	handle_horizontal_movement()
 	handle_vertical_movement()
