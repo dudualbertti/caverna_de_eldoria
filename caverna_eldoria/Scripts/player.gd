@@ -1,14 +1,16 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 300.0
+const MAX_SPEED = 200
 var speed = MAX_SPEED
 
-var velocity_change_speed = 40
+var velocity_change_speed = 50
 
-var jump_velocity = -350
+var jump_velocity = -300
 var gravity = 15
 
 var vertical_velocity = 0
+
+var is_walking = false
 
 var jumping = false
 var can_jump = true
@@ -86,12 +88,17 @@ func handle_horizontal_movement():
 	elif direction < 0:
 		animation.flip_h = true
 	
+	if abs(direction):
+		is_walking = true
+	else:
+		is_walking = false
+	
 	velocity.x = move_toward(velocity.x, direction*speed, velocity_change_speed)
 	
 
 func _physics_process(delta: float) -> void:
 	
-	if abs(velocity.x) > 0:
+	if is_walking:
 		animation.play("run")
 	else:
 		animation.play("idle")

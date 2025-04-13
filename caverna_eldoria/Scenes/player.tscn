@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dntsc6v2efafn" path="res://Assets/Personagem/adventurer-v1.5-Sheet.png" id="2_cvnsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(15, 47)
+size = Vector2(15, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
 atlas = ExtResource("2_cvnsp")
@@ -131,19 +131,18 @@ animations = [{
 script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 12.5)
+position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_3smsa")
 animation = &"jumping"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.795, 0.795)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 limit_left = 0
-limit_bottom = 434
+limit_bottom = 200
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0

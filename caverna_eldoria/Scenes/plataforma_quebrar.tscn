@@ -1,32 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://n64wnhxvm54y"]
+[gd_scene load_steps=8 format=3 uid="uid://n64wnhxvm54y"]
 
 [ext_resource type="Script" uid="uid://conekna1hlim3" path="res://Scripts/plataforma_quebrar.gd" id="1_fhuoe"]
-[ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="1_pedud"]
+[ext_resource type="Texture2D" uid="uid://cuun2cel1jbh7" path="res://Assets/Obstaculos/plataforma_quebrar.png" id="2_fhuoe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc626"]
+atlas = ExtResource("2_fhuoe")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4ivo"]
+atlas = ExtResource("2_fhuoe")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pedud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc626")
+}],
+"loop": true,
+"name": &"inteira",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4ivo")
+}],
+"loop": true,
+"name": &"quebrada",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhuoe"]
-size = Vector2(128, 97)
+size = Vector2(32, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wc626"]
-size = Vector2(128, 26)
+size = Vector2(32, 15)
 
 [node name="plataforma_quebrar" type="Node2D"]
 script = ExtResource("1_fhuoe")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 13)
-scale = Vector2(1, 0.2)
-texture = ExtResource("1_pedud")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 7.3)
+sprite_frames = SubResource("SpriteFrames_pedud")
+animation = &"inteira"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -48.5)
+position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_fhuoe")
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(0, 13)
+position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_wc626")
 
 [node name="QuebrarTimer" type="Timer" parent="."]
