@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1ahvriq0mi4i"]
 
-[ext_resource type="Texture2D" uid="uid://uyq20e7ypxcm" path="res://Assets/espinhos.png" id="1_l8oyh"]
+[ext_resource type="Texture2D" uid="uid://uyq20e7ypxcm" path="res://Assets/Obstaculos/espinhos.png" id="1_l8oyh"]
 [ext_resource type="Script" uid="uid://yqmhwnmulg0a" path="res://Scripts/espinhos.gd" id="1_xgxgw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03ssl"]

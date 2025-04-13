@@ -2,6 +2,7 @@ extends Node2D
 
 var stepped = false
 @onready var quebrar_timer: Timer = $QuebrarTimer
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -9,6 +10,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if not stepped:
 			stepped = true
 		else:
+			sprite.play("quebrada")
 			quebrar_timer.start()
 
 
