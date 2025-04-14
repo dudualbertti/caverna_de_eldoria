@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	
 	var distance_to_player = abs(player.position.x - position.x)
 	
-	if  distance_to_player < 10:
+	if  distance_to_player < 20:
 		if can_spawn:
 			can_spawn = false
 			drop_pedra_timer.start()
