@@ -1,9 +1,13 @@
 extends CharacterBody2D
 
+var random_shake_strength: float = 30.0
+var shake_decay_rate: float = 5.0
+var shake_strength: float = 0.0
+
 const MAX_SPEED = 200
 var speed = MAX_SPEED
 
-var velocity_change_speed = 50
+var velocity_change_speed = 20
 
 var jump_velocity = -300
 var gravity = 15
@@ -11,23 +15,42 @@ var gravity = 15
 var vertical_velocity = 0
 
 var is_walking = false
+var on_air = false
 
 var jumping = false
 var can_jump = true
 
 var pressed_jump = false
 
+@onready var rand = RandomNumberGenerator.new()
+
+
+@export var can_control = true
 @export var max_jump_count = 1
 var jump_count = max_jump_count
 
 @onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
 @onready var coyote_time_timer: Timer = $Coyote_Time_Timer
+@onready var get_control_timer: Timer = $Get_Control_Timer
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera: Camera2D = $Camera2D
 
 
 func Player():
 	pass
 
+func _process(delta: float) -> void:
+	shake_strength = lerp(shake_strength, 0.0, shake_decay_rate * delta)
+	camera.offset = get_random_offset()
+
+
+func get_random_offset():
+	return Vector2(
+		rand.randf_range(-shake_strength, shake_strength),
+		rand.randf_range(-shake_strength, shake_strength)
+	)
+
+	
 func _ready() -> void:
 	animation.play("idle")
 
@@ -51,19 +74,31 @@ func handle_jump_buffer(jump_press):
 func handle_coyote_time():
 	if coyote_time_timer.is_stopped() and can_jump and max_jump_count < 2:
 		coyote_time_timer.start()
+
+
+func apply_gravity():
 	
+	if is_on_floor():
+		return
+	
+	vertical_velocity += gravity
+	vertical_velocity = clamp(vertical_velocity, jump_velocity, 250)
+	velocity.y = vertical_velocity + gravity
+
 	
 func handle_vertical_movement():
 	
 	var jump_press = Input.is_action_pressed("jump")
 	
 	if is_on_floor():
+		on_air = false
 		can_jump = true
 		jump_count = max_jump_count
 		pressed_jump = false
 		vertical_velocity = 0
 	else:
 		vertical_velocity += gravity
+		on_air = true
 		handle_coyote_time()
 	
 	if jump_press and can_jump and not pressed_jump:
@@ -78,8 +113,11 @@ func handle_vertical_movement():
 	
 	jumping = velocity.y < 0 and not is_on_floor()
 	
+	vertical_velocity = clamp(vertical_velocity, jump_velocity, 250)
+	
 	velocity.y = vertical_velocity + gravity
-
+	
+	
 func handle_horizontal_movement():
 	var direction := Input.get_axis("left", "right")
 	
@@ -98,23 +136,44 @@ func handle_horizontal_movement():
 
 func _physics_process(delta: float) -> void:
 	
-	if is_walking:
-		animation.play("run")
-	else:
-		animation.play("idle")
-	
-	if not is_on_floor():
-		if jumping:
-			animation.play("jumping")
-		else:
-			animation.play("falling")
+	if not can_control:
+		apply_gravity()
 		
+		if not is_on_floor():
+			animation.play("falling")
+		else:
+			animation.play("crouched")
+			
+			if get_control_timer.is_stopped():
+				shake_screen(3)
+				get_control_timer.start()
+		
+	else:
 	
-	handle_horizontal_movement()
-	handle_vertical_movement()
+		if is_walking:
+			animation.play("run")
+		else:
+			animation.play("idle")
+		
+		if not is_on_floor():
+			if jumping:
+				animation.play("jumping")
+			else:
+				animation.play("falling")
+			
+		
+		handle_horizontal_movement()
+		handle_vertical_movement()
 
 	move_and_slide()
+	
 
+func shake_screen(strength):
+	shake_strength = strength
 
 func _on_coyote_time_timer_timeout() -> void:
 	can_jump = false
+
+
+func _on_get_control_timer_timeout() -> void:
+	can_control = true

@@ -1,17 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://5li1apa3xwkt"]
+[gd_scene load_steps=6 format=3 uid="uid://5li1apa3xwkt"]
 
 [ext_resource type="Script" uid="uid://bnr0rf1h7d5fp" path="res://Scripts/cristal.gd" id="1_8vk1n"]
-[ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="1_bcr6x"]
+[ext_resource type="Texture2D" uid="uid://c2w61l2fir0up" path="res://Assets/Pegaveis/Cristal2.png" id="2_8vk1n"]
+
+[sub_resource type="Gradient" id="Gradient_8vk1n"]
+offsets = PackedFloat32Array(0, 0.669611)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fs72p"]
+gradient = SubResource("Gradient_8vk1n")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.752137, 0.675214)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcr6x"]
-radius = 19.0263
+radius = 5.0
 
 [node name="cristal" type="Node2D"]
 script = ExtResource("1_8vk1n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.316888, 0.316888)
-texture = ExtResource("1_bcr6x")
+texture = ExtResource("2_8vk1n")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+light_mask = 3
+visibility_layer = 3
+color = Color(1, 0.647059, 0.988235, 0.933333)
+energy = 2.58
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_fs72p")
 
 [node name="Area2D" type="Area2D" parent="."]
 

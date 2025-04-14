@@ -15,6 +15,10 @@ run/main_scene="uid://bmcxj2h6mud4p"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/vsync/vsync_mode=2
+
 [input]
 
 left={

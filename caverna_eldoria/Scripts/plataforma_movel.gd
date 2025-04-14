@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var offset = Vector2(0, -320)
+@export var offset = Vector2(0, -10)
 @export var duration = 5.0
 
 @onready var animatable_body_2d: AnimatableBody2D = $AnimatableBody2D
