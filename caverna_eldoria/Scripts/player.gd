@@ -4,6 +4,8 @@ var random_shake_strength: float = 30.0
 var shake_decay_rate: float = 5.0
 var shake_strength: float = 0.0
 
+var is_on_porta = false
+
 const MAX_SPEED = 200
 var speed = MAX_SPEED
 
@@ -23,10 +25,10 @@ var can_jump = true
 var pressed_jump = false
 
 @onready var rand = RandomNumberGenerator.new()
-
-
 @export var can_control = true
 @export var max_jump_count = 1
+@export var camera_bounds = Vector4(-999999, -999999, 999999, 999999)
+
 var jump_count = max_jump_count
 
 @onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
@@ -42,6 +44,10 @@ func Player():
 func _process(delta: float) -> void:
 	shake_strength = lerp(shake_strength, 0.0, shake_decay_rate * delta)
 	camera.offset = get_random_offset()
+	
+	if is_on_porta:
+		if Input.is_action_just_pressed("interact"):
+			get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 
 func get_random_offset():
@@ -53,6 +59,12 @@ func get_random_offset():
 	
 func _ready() -> void:
 	animation.play("idle")
+	camera.limit_left = int(camera_bounds[0])
+	camera.limit_top = int(camera_bounds[1])
+	camera.limit_right = int(camera_bounds[2])
+	camera.limit_bottom = int(camera_bounds[3])
+	
+	print(camera_bounds)
 
 func jump():
 	if jump_count < 1:
