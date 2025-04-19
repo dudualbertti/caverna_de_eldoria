@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bmcxj2h6mud4p"]
+[gd_scene load_steps=19 format=4 uid="uid://bmcxj2h6mud4p"]
 
 [ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="1_0xrym"]
 [ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="1_7u4ml"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://n64wnhxvm54y" path="res://Scenes/plataforma_quebrar.tscn" id="7_20uw2"]
 [ext_resource type="PackedScene" uid="uid://5li1apa3xwkt" path="res://Scenes/cristal.tscn" id="7_i36j2"]
 [ext_resource type="PackedScene" uid="uid://b0wwbqxdky3aj" path="res://Scenes/porta.tscn" id="10_ir7pk"]
+[ext_resource type="PackedScene" uid="uid://6tfsarkw8wka" path="res://Scenes/pedra_spawner.tscn" id="12_4f2fw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ukdm"]
 texture = ExtResource("1_7u4ml")
@@ -4986,3 +4987,6 @@ rotation = 0.300012
 color = Color(0.419813, 0.419813, 0.419813, 1)
 energy = 0.2
 shadow_enabled = true
+
+[node name="pedra_spawner" parent="." instance=ExtResource("12_4f2fw")]
+position = Vector2(1007, -144)
