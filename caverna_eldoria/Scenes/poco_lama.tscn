@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmonnxkwrua2d"]
 
-[ext_resource type="Texture2D" uid="uid://cw37pexk0nbvm" path="res://icon.svg" id="1_oluxs"]
 [ext_resource type="Script" uid="uid://cisyx71ccayxm" path="res://Scripts/poco_lama.gd" id="1_vkgpd"]
+[ext_resource type="Texture2D" uid="uid://c4ccet81yghis" path="res://Assets/Obstaculos/lama.png" id="2_vkgpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkgpd"]
-size = Vector2(20, 10)
+size = Vector2(32, 10)
 
 [node name="poco_lama" type="Node2D"]
 script = ExtResource("1_vkgpd")
@@ -16,9 +16,8 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_vkgpd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.19209e-07, 3)
-scale = Vector2(0.15625, 0.046875)
-texture = ExtResource("1_oluxs")
+position = Vector2(0, 8)
+texture = ExtResource("2_vkgpd")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
