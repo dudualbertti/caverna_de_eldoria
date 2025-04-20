@@ -5,17 +5,18 @@ extends Node2D
 var pedra_scene = preload("res://Scenes/pedra.tscn")
 var can_spawn = true
 
+var distance_to_player = 0.0
+
 func _process(delta: float) -> void:
 	var player = get_parent().get_node("Player")
 	
-	var distance_to_player = abs(player.position.x - position.x)
+	if player:
+		distance_to_player = abs(player.position.x - position.x)
 	
 	if  distance_to_player < 20:
 		if can_spawn:
 			can_spawn = false
 			drop_pedra_timer.start()
-	else:
-		pass
 
 
 func _on_drop_pedra_timer_timeout() -> void:

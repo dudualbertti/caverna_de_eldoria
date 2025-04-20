@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bmcxj2h6mud4p"]
+[gd_scene load_steps=20 format=4 uid="uid://bmcxj2h6mud4p"]
 
 [ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="1_0xrym"]
 [ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="1_7u4ml"]
@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://5li1apa3xwkt" path="res://Scenes/cristal.tscn" id="7_i36j2"]
 [ext_resource type="PackedScene" uid="uid://b0wwbqxdky3aj" path="res://Scenes/porta.tscn" id="10_ir7pk"]
 [ext_resource type="PackedScene" uid="uid://6tfsarkw8wka" path="res://Scenes/pedra_spawner.tscn" id="12_4f2fw"]
+[ext_resource type="PackedScene" uid="uid://bsfdwrar882k1" path="res://Scenes/kill_radius.tscn" id="12_8r8ce"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ukdm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilsv2"]
 texture = ExtResource("1_7u4ml")
 12:2/0 = 0
 47:3/0 = 0
@@ -994,7 +995,7 @@ texture = ExtResource("1_7u4ml")
 9:40/0 = 0
 9:41/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilsv2"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4f2fw"]
 texture = ExtResource("5_hkfpk")
 5:1/0 = 0
 6:1/0 = 0
@@ -3288,7 +3289,7 @@ texture = ExtResource("5_hkfpk")
 60:79/0 = 0
 62:79/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4f2fw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8r8ce"]
 texture = ExtResource("6_ir7pk")
 9:0/0 = 0
 10:0/0 = 0
@@ -4854,9 +4855,9 @@ texture = ExtResource("6_ir7pk")
 
 [sub_resource type="TileSet" id="TileSet_0xrym"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_1ukdm")
-sources/1 = SubResource("TileSetAtlasSource_ilsv2")
-sources/2 = SubResource("TileSetAtlasSource_4f2fw")
+sources/0 = SubResource("TileSetAtlasSource_ilsv2")
+sources/1 = SubResource("TileSetAtlasSource_4f2fw")
+sources/2 = SubResource("TileSetAtlasSource_8r8ce")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20uw2"]
 size = Vector2(39, 286)
@@ -4903,13 +4904,6 @@ repeat_times = 5
 position = Vector2(384, -46)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_20uw2")
-metadata/_edit_lock_ = true
-
-[node name="Background4a2" type="Sprite2D" parent="Parallax2D3"]
-position = Vector2(384, 338)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("3_20uw2")
-flip_v = true
 metadata/_edit_lock_ = true
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
@@ -4990,3 +4984,14 @@ shadow_enabled = true
 
 [node name="pedra_spawner" parent="." instance=ExtResource("12_4f2fw")]
 position = Vector2(1007, -144)
+
+[node name="cristal3" parent="." instance=ExtResource("7_i36j2")]
+position = Vector2(309, -26)
+
+[node name="KillRadius" parent="." instance=ExtResource("12_8r8ce")]
+position = Vector2(549, 99)
+scale = Vector2(6.04, 1.48)
+
+[node name="KillRadius2" parent="." instance=ExtResource("12_8r8ce")]
+position = Vector2(1013, 99)
+scale = Vector2(12.6, 1.48)

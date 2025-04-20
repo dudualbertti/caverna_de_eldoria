@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_button_comecar_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Levels/level1.tscn")
+	Global.goto_scene("res://Scenes/Levels/level1.tscn")
 
 
 func _on_button_sair_pressed() -> void:

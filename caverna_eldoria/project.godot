@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Audio="*res://Scripts/Audio.gd"
+Sounds="*res://Scripts/Sounds.gd"
+TransitionScreen="*res://Scenes/transition_screen.tscn"
+Global="*res://Scripts/global.gd"
+Camera="*res://Scripts/camera.gd"
 
 [display]
 

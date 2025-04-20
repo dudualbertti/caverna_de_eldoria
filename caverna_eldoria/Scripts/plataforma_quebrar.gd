@@ -27,4 +27,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_quebrar_timer_timeout() -> void:
+	Sounds.play_sound(preload("res://Assets/Sounds/rock_break.ogg"), rand.randf_range(0.9, 1.1))
 	queue_free()
