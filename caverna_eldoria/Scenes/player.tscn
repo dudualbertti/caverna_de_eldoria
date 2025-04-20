@@ -1,7 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bn6db8nxrw2wx"]
+[gd_scene load_steps=22 format=3 uid="uid://bn6db8nxrw2wx"]
 
 [ext_resource type="Script" uid="uid://ryg26fp8m08s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dntsc6v2efafn" path="res://Assets/Personagem/adventurer-v1.5-Sheet.png" id="2_cvnsp"]
+[ext_resource type="AudioStream" uid="uid://dv5h8og5hxamg" path="res://Assets/Sounds/steps.ogg" id="3_6t5aa"]
+[ext_resource type="AudioStream" uid="uid://42li287fer0f" path="res://Assets/Sounds/jump.ogg" id="4_vgqql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(9, 24)
@@ -170,6 +172,13 @@ one_shot = true
 
 [node name="Get_Control_Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioPassos" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6t5aa")
+volume_db = -5.0
+
+[node name="AudioPulo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vgqql")
 
 [connection signal="timeout" from="Coyote_Time_Timer" to="." method="_on_coyote_time_timer_timeout"]
 [connection signal="timeout" from="Get_Control_Timer" to="." method="_on_get_control_timer_timeout"]

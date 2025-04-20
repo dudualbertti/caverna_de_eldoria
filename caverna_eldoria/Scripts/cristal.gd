@@ -5,10 +5,13 @@ extends Node2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+var rng = RandomNumberGenerator.new()
+
 var tween : Tween
 
 func _ready():
 	start_tween()
+
 
 func start_tween():
 	tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
@@ -19,5 +22,6 @@ func start_tween():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("Player"):
+		Sounds.play_sound(preload("res://Assets/Sounds/Pickup.wav"), rng.randf_range(0.9, 1.1), -5.0)
 		tween.kill()
 		queue_free()

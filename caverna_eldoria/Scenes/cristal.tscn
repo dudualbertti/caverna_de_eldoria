@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://5li1apa3xwkt"]
+[gd_scene load_steps=7 format=3 uid="uid://5li1apa3xwkt"]
 
 [ext_resource type="Script" uid="uid://bnr0rf1h7d5fp" path="res://Scripts/cristal.gd" id="1_8vk1n"]
 [ext_resource type="Texture2D" uid="uid://c2w61l2fir0up" path="res://Assets/Pegaveis/Cristal2.png" id="2_8vk1n"]
+[ext_resource type="AudioStream" uid="uid://ir76t3gc27on" path="res://Assets/Sounds/Pickup.wav" id="3_fs72p"]
 
 [sub_resource type="Gradient" id="Gradient_8vk1n"]
 offsets = PackedFloat32Array(0, 0.669611)
@@ -35,5 +36,8 @@ texture = SubResource("GradientTexture2D_fs72p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_bcr6x")
+
+[node name="AudioPegou" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fs72p")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

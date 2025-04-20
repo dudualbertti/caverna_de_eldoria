@@ -1,9 +1,5 @@
 extends CharacterBody2D
 
-var random_shake_strength: float = 30.0
-var shake_decay_rate: float = 5.0
-var shake_strength: float = 0.0
-
 var is_on_porta = false
 
 const MAX_SPEED = 200
@@ -24,52 +20,48 @@ var can_jump = true
 
 var pressed_jump = false
 
-@onready var rand = RandomNumberGenerator.new()
 @export var can_control = true
 @export var max_jump_count = 1
 @export var camera_bounds = Vector4(-999999, -999999, 999999, 999999)
 
 var jump_count = max_jump_count
 
-@onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
 @onready var coyote_time_timer: Timer = $Coyote_Time_Timer
 @onready var get_control_timer: Timer = $Get_Control_Timer
+@onready var jump_buffer_timer: Timer = $Jump_Buffer_Timer
+
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var audio_passos: AudioStreamPlayer = $AudioPassos
+@onready var audio_pulo: AudioStreamPlayer = $AudioPulo
 @onready var camera: Camera2D = $Camera2D
 
+@onready var rand = RandomNumberGenerator.new()
 
 func Player():
 	pass
 
+
 func _process(delta: float) -> void:
-	shake_strength = lerp(shake_strength, 0.0, shake_decay_rate * delta)
-	camera.offset = get_random_offset()
-	
+	Camera.shake_camera(camera, delta)
 	if is_on_porta:
 		if Input.is_action_just_pressed("interact"):
-			get_tree().change_scene_to_file("res://Scenes/main.tscn")
+			Global.goto_scene("res://Scenes/main.tscn")
 
 
-func get_random_offset():
-	return Vector2(
-		rand.randf_range(-shake_strength, shake_strength),
-		rand.randf_range(-shake_strength, shake_strength)
-	)
-
-	
 func _ready() -> void:
 	animation.play("idle")
 	camera.limit_left = int(camera_bounds[0])
 	camera.limit_top = int(camera_bounds[1])
 	camera.limit_right = int(camera_bounds[2])
 	camera.limit_bottom = int(camera_bounds[3])
-	
-	print(camera_bounds)
+
 
 func jump():
 	if jump_count < 1:
 		can_jump = false
 	
+	audio_pulo.pitch_scale = rand.randf_range(1.1, 1.5)
+	audio_pulo.play()
 	jump_count -= 1
 	vertical_velocity = jump_velocity
 
@@ -81,7 +73,7 @@ func handle_jump_buffer(jump_press):
 		
 	if is_on_floor() and not jump_buffer_timer.is_stopped():
 		jump()
-		
+
 
 func handle_coyote_time():
 	if coyote_time_timer.is_stopped() and can_jump and max_jump_count < 2:
@@ -97,7 +89,7 @@ func apply_gravity():
 	vertical_velocity = clamp(vertical_velocity, jump_velocity, 250)
 	velocity.y = vertical_velocity + gravity
 
-	
+
 func handle_vertical_movement():
 	
 	var jump_press = Input.is_action_pressed("jump")
@@ -128,8 +120,8 @@ func handle_vertical_movement():
 	vertical_velocity = clamp(vertical_velocity, jump_velocity, 250)
 	
 	velocity.y = vertical_velocity + gravity
-	
-	
+
+
 func handle_horizontal_movement():
 	var direction := Input.get_axis("left", "right")
 	
@@ -144,7 +136,7 @@ func handle_horizontal_movement():
 		is_walking = false
 	
 	velocity.x = move_toward(velocity.x, direction*speed, velocity_change_speed)
-	
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -157,7 +149,8 @@ func _physics_process(delta: float) -> void:
 			animation.play("crouched")
 			
 			if get_control_timer.is_stopped():
-				shake_screen(3)
+				Sounds.play_sound(preload("res://Assets/Sounds/starting_cutscene_landing.ogg"))
+				Camera.apply_shake(3)
 				get_control_timer.start()
 		
 	else:
@@ -176,12 +169,14 @@ func _physics_process(delta: float) -> void:
 		
 		handle_horizontal_movement()
 		handle_vertical_movement()
-
-	move_and_slide()
 	
+	if is_walking and is_on_floor():
+		if not audio_passos.playing:
+			audio_passos.pitch_scale = rand.randf_range(0.9, 1.1)
+			audio_passos.play()
+	
+	move_and_slide()
 
-func shake_screen(strength):
-	shake_strength = strength
 
 func _on_coyote_time_timer_timeout() -> void:
 	can_jump = false
