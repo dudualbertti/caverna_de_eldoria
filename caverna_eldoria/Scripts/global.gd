@@ -3,6 +3,9 @@ extends Node
 var current_scene = "res://Scenes/Menus/menu.tscn"
 var last_scene = current_scene
 
+var current_time = 20
+var pontos = 0
+
 var rand = RandomNumberGenerator.new()
 
 

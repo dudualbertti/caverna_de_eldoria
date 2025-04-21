@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqns3u0ocnigi"]
+
+[ext_resource type="Script" uid="uid://cc4ffg1dflqms" path="res://Scripts/activate_tutorial.gd" id="1_yasn3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwovg"]
+radius = 17.0294
+
+[node name="ActivateTutorial" type="Node2D"]
+script = ExtResource("1_yasn3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cwovg")

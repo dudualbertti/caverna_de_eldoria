@@ -1,9 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://bn6db8nxrw2wx"]
+[gd_scene load_steps=30 format=3 uid="uid://bn6db8nxrw2wx"]
 
 [ext_resource type="Script" uid="uid://ryg26fp8m08s" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dntsc6v2efafn" path="res://Assets/Personagem/adventurer-v1.5-Sheet.png" id="2_cvnsp"]
 [ext_resource type="AudioStream" uid="uid://dv5h8og5hxamg" path="res://Assets/Sounds/steps.ogg" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://d1mvmj1ot53a8" path="res://Scenes/Menus/gui.tscn" id="3_fkybt"]
+[ext_resource type="Texture2D" uid="uid://prg4406en7je" path="res://Assets/UI/botoes_andar.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://dlgcq65qwlpf7" path="res://Assets/UI/botoes_pular.png" id="4_8erm5"]
 [ext_resource type="AudioStream" uid="uid://42li287fer0f" path="res://Assets/Sounds/jump.ogg" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://cnb2hvin6ppsp" path="res://Assets/UI/botoes_interagir.png" id="5_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(9, 24)
@@ -141,6 +145,72 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="Animation" id="Animation_8erm5"]
+resource_name = "show_botoes_andar"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Botoes_andar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f1ek2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Botoes_andar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Botoes_pular:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tx1dd"]
+resource_name = "show_botoes_pular"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Botoes_pular:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gymyn"]
+_data = {
+&"RESET": SubResource("Animation_f1ek2"),
+&"show_botoes_andar": SubResource("Animation_8erm5"),
+&"show_botoes_pular": SubResource("Animation_tx1dd")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
 
@@ -152,6 +222,21 @@ shape = SubResource("RectangleShape2D_cvnsp")
 sprite_frames = SubResource("SpriteFrames_3smsa")
 animation = &"crouched"
 
+[node name="Botoes_andar" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -37)
+texture = ExtResource("3_x3wgy")
+
+[node name="Botoes_pular" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -23)
+texture = ExtResource("4_8erm5")
+
+[node name="Botoes_interagir" type="Sprite2D" parent="." groups=["player"]]
+visible = false
+position = Vector2(0, -23)
+texture = ExtResource("5_f1ek2")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.795, 0.795)
 zoom = Vector2(2.5, 2.5)
@@ -160,6 +245,16 @@ limit_top = -207
 limit_bottom = 60
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="GUI" parent="Camera2D" instance=ExtResource("3_fkybt")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Coyote_Time_Timer" type="Timer" parent="."]
 process_callback = 0
@@ -179,6 +274,11 @@ volume_db = -5.0
 
 [node name="AudioPulo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_vgqql")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gymyn")
+}
 
 [connection signal="timeout" from="Coyote_Time_Timer" to="." method="_on_coyote_time_timer_timeout"]
 [connection signal="timeout" from="Get_Control_Timer" to="." method="_on_get_control_timer_timeout"]

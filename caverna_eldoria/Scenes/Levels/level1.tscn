@@ -1,17 +1,21 @@
-[gd_scene load_steps=20 format=4 uid="uid://bmcxj2h6mud4p"]
+[gd_scene load_steps=24 format=4 uid="uid://bmcxj2h6mud4p"]
 
 [ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="1_0xrym"]
 [ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="1_7u4ml"]
 [ext_resource type="PackedScene" uid="uid://bn6db8nxrw2wx" path="res://Scenes/player.tscn" id="1_16p8j"]
+[ext_resource type="Script" uid="uid://boo7uhjxwm8w8" path="res://Scripts/Levels/level_1.gd" id="1_ryjqc"]
 [ext_resource type="Texture2D" uid="uid://bi4nsgxb86k7i" path="res://Assets/Backgrounds/background3.png" id="2_m0h5h"]
 [ext_resource type="Texture2D" uid="uid://dnfdwcdd5turi" path="res://Assets/Backgrounds/background4a.png" id="3_20uw2"]
 [ext_resource type="Texture2D" uid="uid://delfaw0mmktfj" path="res://Assets/Tilesets/props1.png" id="5_hkfpk"]
 [ext_resource type="Texture2D" uid="uid://c2o20nrxfq517" path="res://Assets/Tilesets/props2.png" id="6_ir7pk"]
 [ext_resource type="PackedScene" uid="uid://n64wnhxvm54y" path="res://Scenes/plataforma_quebrar.tscn" id="7_20uw2"]
 [ext_resource type="PackedScene" uid="uid://5li1apa3xwkt" path="res://Scenes/cristal.tscn" id="7_i36j2"]
+[ext_resource type="PackedScene" uid="uid://o3o6mef5isy8" path="res://Scenes/Levels/level2.tscn" id="8_nqasx"]
 [ext_resource type="PackedScene" uid="uid://b0wwbqxdky3aj" path="res://Scenes/porta.tscn" id="10_ir7pk"]
 [ext_resource type="PackedScene" uid="uid://6tfsarkw8wka" path="res://Scenes/pedra_spawner.tscn" id="12_4f2fw"]
 [ext_resource type="PackedScene" uid="uid://bsfdwrar882k1" path="res://Scenes/kill_radius.tscn" id="12_8r8ce"]
+[ext_resource type="PackedScene" uid="uid://d1ahvriq0mi4i" path="res://Scenes/espinhos.tscn" id="13_8r8ce"]
+[ext_resource type="PackedScene" uid="uid://cqns3u0ocnigi" path="res://Scenes/activate_tutorial.tscn" id="16_xe7un"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilsv2"]
 texture = ExtResource("1_7u4ml")
@@ -4869,7 +4873,8 @@ polygon = PackedVector2Array(-18, -258, 151, -251, -18, -219)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i36j2"]
 polygon = PackedVector2Array(212, -244, 257, -183, 1643, -209)
 
-[node name="Node2D" type="Node2D"]
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_ryjqc")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 1)
@@ -4919,6 +4924,7 @@ tile_set = SubResource("TileSet_0xrym")
 
 [node name="porta" parent="." instance=ExtResource("10_ir7pk")]
 position = Vector2(1281, -31)
+next_scene = ExtResource("8_nqasx")
 
 [node name="plataforma_quebrar" parent="." instance=ExtResource("7_20uw2")]
 position = Vector2(1011, -27)
@@ -4931,6 +4937,7 @@ position = Vector2(548, -47)
 
 [node name="Player" parent="." instance=ExtResource("1_16p8j")]
 position = Vector2(153, -480)
+show_tutorials = true
 can_control = false
 camera_bounds = Vector4(0, -207, 1425, 60)
 
@@ -4965,19 +4972,19 @@ occluder = SubResource("OccluderPolygon2D_20uw2")
 occluder = SubResource("OccluderPolygon2D_i36j2")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-rotation = 0.315346
+rotation = 0.382416
 color = Color(0.419813, 0.419813, 0.419813, 1)
 energy = 0.5
 shadow_enabled = true
 
 [node name="DirectionalLight2D2" type="DirectionalLight2D" parent="."]
-rotation = 0.329443
+rotation = 0.396513
 color = Color(0.419813, 0.419813, 0.419813, 1)
 energy = 0.3
 shadow_enabled = true
 
 [node name="DirectionalLight2D3" type="DirectionalLight2D" parent="."]
-rotation = 0.300012
+rotation = 0.367082
 color = Color(0.419813, 0.419813, 0.419813, 1)
 energy = 0.2
 shadow_enabled = true
@@ -4986,7 +4993,7 @@ shadow_enabled = true
 position = Vector2(1007, -144)
 
 [node name="cristal3" parent="." instance=ExtResource("7_i36j2")]
-position = Vector2(309, -26)
+position = Vector2(309, -16)
 
 [node name="KillRadius" parent="." instance=ExtResource("12_8r8ce")]
 position = Vector2(549, 99)
@@ -4995,3 +5002,16 @@ scale = Vector2(6.04, 1.48)
 [node name="KillRadius2" parent="." instance=ExtResource("12_8r8ce")]
 position = Vector2(1013, 99)
 scale = Vector2(12.6, 1.48)
+
+[node name="Node2D" parent="." instance=ExtResource("13_8r8ce")]
+position = Vector2(386, 0)
+scale = Vector2(2, 2)
+
+[node name="ActivateTutorial" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_xe7un")]
+position = Vector2(165, 0)
+player = NodePath("../Player")
+
+[node name="ActivateTutorial2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_xe7un")]
+position = Vector2(466, 0)
+num = 1
+player = NodePath("../Player")

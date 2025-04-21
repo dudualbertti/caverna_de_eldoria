@@ -27,6 +27,11 @@ Camera="*res://Scripts/camera.gd"
 
 window/vsync/vsync_mode=2
 
+[global_group]
+
+cristais=""
+player=""
+
 [input]
 
 left={
