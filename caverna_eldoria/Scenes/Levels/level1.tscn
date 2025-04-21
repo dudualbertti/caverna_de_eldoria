@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bmcxj2h6mud4p"]
+[gd_scene load_steps=23 format=4 uid="uid://bmcxj2h6mud4p"]
 
 [ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="1_0xrym"]
 [ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="1_7u4ml"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b0wwbqxdky3aj" path="res://Scenes/porta.tscn" id="10_ir7pk"]
 [ext_resource type="PackedScene" uid="uid://6tfsarkw8wka" path="res://Scenes/pedra_spawner.tscn" id="12_4f2fw"]
 [ext_resource type="PackedScene" uid="uid://bsfdwrar882k1" path="res://Scenes/kill_radius.tscn" id="12_8r8ce"]
-[ext_resource type="PackedScene" uid="uid://d1ahvriq0mi4i" path="res://Scenes/espinhos.tscn" id="13_8r8ce"]
 [ext_resource type="PackedScene" uid="uid://cqns3u0ocnigi" path="res://Scenes/activate_tutorial.tscn" id="16_xe7un"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ilsv2"]
@@ -5002,10 +5001,6 @@ scale = Vector2(6.04, 1.48)
 [node name="KillRadius2" parent="." instance=ExtResource("12_8r8ce")]
 position = Vector2(1013, 99)
 scale = Vector2(12.6, 1.48)
-
-[node name="Node2D" parent="." instance=ExtResource("13_8r8ce")]
-position = Vector2(386, 0)
-scale = Vector2(2, 2)
 
 [node name="ActivateTutorial" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_xe7un")]
 position = Vector2(165, 0)

@@ -11,6 +11,7 @@ var velocity_change_speed = 20
 
 var jump_velocity = -300
 var gravity = 15
+var can_walk = true
 
 var vertical_velocity = 0
 
@@ -22,6 +23,8 @@ var can_jump = true
 var can_die = true
 
 var pressed_jump = false
+
+var poco_atual = null
 
 @export var can_control = true
 @export var max_jump_count = 1
@@ -69,9 +72,14 @@ func die():
 
 func _process(delta: float) -> void:
 	Camera.shake_camera(camera, delta)
+	
 	if porta_colidindo:
 		$Botoes_interagir.visible = true
 		if Input.is_action_just_pressed("interact"):
+			can_jump = false
+			is_walking = false
+			can_walk = false
+			velocity = Vector2.ZERO
 			can_die = false
 			porta_colidindo.interact()
 	else:
@@ -154,19 +162,20 @@ func handle_vertical_movement():
 
 
 func handle_horizontal_movement():
-	var direction := Input.get_axis("left", "right")
-	
-	if direction > 0:
-		animation.flip_h = false
-	elif direction < 0:
-		animation.flip_h = true
-	
-	if abs(direction):
-		is_walking = true
-	else:
-		is_walking = false
-	
-	velocity.x = move_toward(velocity.x, direction*speed, velocity_change_speed)
+	if can_walk:
+		var direction := Input.get_axis("left", "right")
+		
+		if direction > 0:
+			animation.flip_h = false
+		elif direction < 0:
+			animation.flip_h = true
+		
+		if abs(direction):
+			is_walking = true
+		else:
+			is_walking = false
+		
+		velocity.x = move_toward(velocity.x, direction*speed, velocity_change_speed)
 
 
 func _physics_process(delta: float) -> void:
