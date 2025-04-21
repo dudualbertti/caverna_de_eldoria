@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-var is_on_porta = false
+@export var show_tutorials:bool = false
+
+var porta_colidindo = null
 
 const MAX_SPEED = 200
 var speed = MAX_SPEED
@@ -17,6 +19,7 @@ var on_air = false
 
 var jumping = false
 var can_jump = true
+var can_die = true
 
 var pressed_jump = false
 
@@ -37,15 +40,42 @@ var jump_count = max_jump_count
 
 @onready var rand = RandomNumberGenerator.new()
 
+
 func Player():
 	pass
 
 
+func show_tutorial(num):
+	match num:
+		0:
+			$AnimationPlayer.play("show_botoes_andar")
+		1:
+			$AnimationPlayer.play("show_botoes_pular")
+
+func hide_tutorial(num):
+	match num:
+		0:
+			$Botoes_andar.visible = false
+		1:
+			$Botoes_pular.visible = false
+
+
+func die():
+	if can_die:
+		can_control = false
+		velocity = Vector2.ZERO
+		Global.goto_scene("res://Scenes/Menus/GameOver.tscn")
+
+
 func _process(delta: float) -> void:
 	Camera.shake_camera(camera, delta)
-	if is_on_porta:
+	if porta_colidindo:
+		$Botoes_interagir.visible = true
 		if Input.is_action_just_pressed("interact"):
-			Global.goto_scene("res://Scenes/main.tscn")
+			can_die = false
+			porta_colidindo.interact()
+	else:
+		$Botoes_interagir.visible = false
 
 
 func _ready() -> void:
@@ -100,6 +130,7 @@ func handle_vertical_movement():
 		jump_count = max_jump_count
 		pressed_jump = false
 		vertical_velocity = 0
+		
 	else:
 		vertical_velocity += gravity
 		on_air = true

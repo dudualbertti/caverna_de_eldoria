@@ -26,6 +26,10 @@ func _on_timer_timeout() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	
+	if body.has_method("Player"):
+		body.die()
+		
 	if can_die.is_stopped():
 		Sounds.play_sound(preload("res://Assets/Sounds/pedra_quebrando.wav"), rand.randf_range(0.9, 1.1))
 		queue_free()

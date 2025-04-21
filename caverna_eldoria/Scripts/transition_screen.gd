@@ -22,4 +22,6 @@ func _on_animation_finished(anim_name):
 
 func transition():
 	color_rect.visible = true
+	for cristal in get_tree().get_nodes_in_group("cristais"):
+		cristal.tween.kill()
 	animation_player.play("fade_to_black")

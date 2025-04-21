@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1ahvriq0mi4i"]
+[gd_scene load_steps=10 format=3 uid="uid://d1ahvriq0mi4i"]
 
 [ext_resource type="Texture2D" uid="uid://uyq20e7ypxcm" path="res://Assets/Obstaculos/espinhos.png" id="1_l8oyh"]
 [ext_resource type="Script" uid="uid://yqmhwnmulg0a" path="res://Scripts/espinhos.gd" id="1_xgxgw"]
+[ext_resource type="AudioStream" uid="uid://lrkyh3ute4ei" path="res://Assets/Sounds/espinhos_ativado.wav" id="3_03ssl"]
+[ext_resource type="AudioStream" uid="uid://cege107xi7iou" path="res://Assets/Sounds/espinhos.mp3" id="3_oxcnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03ssl"]
 atlas = ExtResource("1_l8oyh")
@@ -53,9 +55,9 @@ position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_k1hro")
 animation = &"idle"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_ti6hq")
 
@@ -66,6 +68,12 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="AudioExtendido" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oxcnc")
+
+[node name="AudioAtivado" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_03ssl")
+
+[connection signal="body_entered" from="area" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="AtivarTimer" to="." method="_on_ativar_timer_timeout"]
 [connection signal="timeout" from="DesativarTimer" to="." method="_on_desativar_timer_timeout"]

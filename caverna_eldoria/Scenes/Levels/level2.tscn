@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://o3o6mef5isy8"]
+[gd_scene load_steps=15 format=4 uid="uid://o3o6mef5isy8"]
 
+[ext_resource type="Script" uid="uid://cu3ufyyruyoog" path="res://Scripts/Levels/level_2.gd" id="1_16px4"]
 [ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="1_bxvyr"]
 [ext_resource type="Texture2D" uid="uid://bi4nsgxb86k7i" path="res://Assets/Backgrounds/background3.png" id="2_pyd1a"]
 [ext_resource type="Texture2D" uid="uid://dnfdwcdd5turi" path="res://Assets/Backgrounds/background4a.png" id="3_o7bax"]
@@ -4858,7 +4859,8 @@ sources/2 = SubResource("TileSetAtlasSource_4f2fw")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20uw2"]
 size = Vector2(39, 286)
 
-[node name="Node2D" type="Node2D"]
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_16px4")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 1)
@@ -4917,7 +4919,6 @@ position = Vector2(1281, -31)
 
 [node name="Player" parent="." instance=ExtResource("10_jywle")]
 position = Vector2(122, -26)
-can_control = false
 camera_bounds = Vector4(0, -207, 1425, 60)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
