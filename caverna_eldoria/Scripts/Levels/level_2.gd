@@ -1,4 +1,4 @@
 extends Node2D
 
 func _ready():
-	Global.current_time = 20
+	Global.current_time = 1000

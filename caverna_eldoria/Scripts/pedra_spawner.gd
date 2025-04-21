@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var drop_pedra_timer: Timer = $DropPedraTimer
+@export var drop_distance: int = 45
 
 var pedra_scene = preload("res://Scenes/pedra.tscn")
 var can_spawn = true
@@ -13,7 +14,7 @@ func _process(delta: float) -> void:
 	if player:
 		distance_to_player = abs(player.position.x - position.x)
 	
-	if  distance_to_player < 20:
+	if  distance_to_player < drop_distance:
 		if can_spawn:
 			can_spawn = false
 			drop_pedra_timer.start()

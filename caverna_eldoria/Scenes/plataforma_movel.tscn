@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvrv0"]
 size = Vector2(48, 16)
 
-[node name="Plataforma" type="Node2D"]
+[node name="Plataforma" type="Node2D" groups=["plataformas"]]
 script = ExtResource("1_5pa1n")
 offset = Vector2(0, -20)
 

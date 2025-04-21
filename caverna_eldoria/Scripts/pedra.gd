@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	
 	rotation += angular_speed * delta
 	
-	grav = lerp(grav, 0.2, 0.05)
+	grav = lerp(grav, 0.2, 0.1)
 	
 	vspd += grav
 	
