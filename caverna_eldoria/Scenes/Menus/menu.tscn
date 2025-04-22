@@ -76,10 +76,6 @@ layout_mode = 2
 text = "Iniciar
 "
 
-[node name="ButtonOpcoes" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Opções"
-
 [node name="ButtonScoreboard" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Ranking"

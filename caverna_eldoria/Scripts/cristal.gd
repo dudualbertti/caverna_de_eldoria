@@ -37,4 +37,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		Sounds.play_sound(preload("res://Assets/Sounds/Pickup.wav"), rng.randf_range(0.9, 1.1), -5.0)
 		tween.kill()
 		Global.pontos += valor
+		Global.cristais_coletados[tipo] += 1
 		queue_free()

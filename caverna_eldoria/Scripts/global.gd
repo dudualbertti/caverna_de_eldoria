@@ -10,7 +10,16 @@ var score_board = {}
 var current_time = 0
 var pontos = 0
 
+var game_end = false
+
 var rand = RandomNumberGenerator.new()
+
+var cristais_coletados = {
+	0: 0,
+	1: 0,
+	2: 0
+}
+
 
 func _ready():
 	load_game()
@@ -23,7 +32,7 @@ func load_game():
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	var json = JSON.new()
 	score_board = json.parse_string(save_file.get_as_text())
-	
+
 
 func goto_scene(scene_path):
 	TransitionScreen.transition()

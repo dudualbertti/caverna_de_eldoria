@@ -13,8 +13,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func interact():
 	if can_interact:
 		can_interact = false
-		#Global.pontos += 5*Global.current_time
-		Global.save_game()
 		Global.goto_scene(next_scene.resource_path)
 
 

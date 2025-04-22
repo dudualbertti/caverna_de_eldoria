@@ -220,7 +220,7 @@ shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3smsa")
-animation = &"jumping"
+animation = &"idle"
 
 [node name="Botoes_andar" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
