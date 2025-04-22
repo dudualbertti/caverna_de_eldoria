@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://btsorvyp65v7c"]
+
+[ext_resource type="Script" uid="uid://b48f0w6mtjvqe" path="res://Scripts/escolher_nome.gd" id="1_y7yae"]
+[ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="2_nl3ln"]
+[ext_resource type="Texture2D" uid="uid://bi4nsgxb86k7i" path="res://Assets/Backgrounds/background3.png" id="3_htv6b"]
+[ext_resource type="Texture2D" uid="uid://dnfdwcdd5turi" path="res://Assets/Backgrounds/background4a.png" id="4_vhsh1"]
+
+[node name="Nome" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y7yae")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.5, 1)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-5, 0)
+repeat_times = 7
+
+[node name="Background1" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(384, -46)
+scale = Vector2(2, 2)
+texture = ExtResource("2_nl3ln")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.7, 1)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-7, 0)
+repeat_times = 7
+
+[node name="Background3" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(384, -46)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_htv6b")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 7
+
+[node name="Background4a" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(384, -46)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_vhsh1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -43.14
+offset_right = 110.0
+offset_bottom = 43.14
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 37.765)
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Insira seu nome...."
+
+[node name="ButtonAvancar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+disabled = true
+text = "Avançar"
+
+[node name="ButtonVoltar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Voltar"
+
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/ButtonAvancar" to="." method="_on_button_avancar_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonVoltar" to="." method="_on_button_voltar_pressed"]
