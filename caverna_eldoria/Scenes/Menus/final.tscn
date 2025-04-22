@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://cqtyjuwhvfbmh"]
+[gd_scene load_steps=13 format=4 uid="uid://4hj4n5or562r"]
 
-[ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="1_40baj"]
-[ext_resource type="Script" uid="uid://dlmtak5ddpyj6" path="res://Scripts/game_over.gd" id="1_n12m5"]
-[ext_resource type="FontFile" uid="uid://boumi2qgas3nm" path="res://Assets/Fonts/Font.ttf" id="2_a1htc"]
+[ext_resource type="Script" uid="uid://c1l8ynii165n8" path="res://Scripts/final.gd" id="1_00yp6"]
+[ext_resource type="Texture2D" uid="uid://bauuj6wsa0e5q" path="res://Assets/Tilesets/mainlev_build.png" id="2_5n8f8"]
+[ext_resource type="FontFile" uid="uid://boumi2qgas3nm" path="res://Assets/Fonts/Font.ttf" id="3_b7xob"]
+[ext_resource type="Texture2D" uid="uid://c2w61l2fir0up" path="res://Assets/Pegaveis/Cristal2.png" id="4_00yp6"]
+[ext_resource type="Texture2D" uid="uid://c70e2jaq2w7d5" path="res://Assets/Pegaveis/Cristal_grande.png" id="5_brcxn"]
+[ext_resource type="Texture2D" uid="uid://x0xaw5mfe54y" path="res://Assets/Pegaveis/Cristal_raro.png" id="6_d2wlh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a1htc"]
-texture = ExtResource("1_40baj")
+texture = ExtResource("2_5n8f8")
 6:1/0 = 0
 20:1/0 = 0
 21:1/0 = 0
@@ -916,12 +919,20 @@ texture = ExtResource("1_40baj")
 sources/0 = SubResource("TileSetAtlasSource_a1htc")
 
 [sub_resource type="LabelSettings" id="LabelSettings_eksk4"]
-font = ExtResource("2_a1htc")
+font = ExtResource("3_b7xob")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_xl4ts"]
-font = ExtResource("2_a1htc")
+font = ExtResource("3_b7xob")
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_00yp6"]
+font = ExtResource("3_b7xob")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4267"]
+font = ExtResource("3_b7xob")
+font_size = 20
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -930,7 +941,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_n12m5")
+script = ExtResource("1_00yp6")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 modulate = Color(0.617455, 0.617455, 0.617455, 1)
@@ -942,10 +953,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -178.0
-offset_top = 146.0
-offset_right = 176.0
-offset_bottom = 262.0
+offset_left = -241.0
+offset_top = 57.0
+offset_right = 239.0
+offset_bottom = 173.0
 grow_horizontal = 2
 alignment = 1
 
@@ -957,9 +968,101 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "A caverna desmoronou..."
+text = "Você chegou ao final da caverna!"
 label_settings = SubResource("LabelSettings_xl4ts")
 horizontal_alignment = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -241.0
+offset_top = 382.0
+offset_right = 239.0
+offset_bottom = 498.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="LabelTempo" type="Label" parent="VBoxContainer4"]
+layout_mode = 2
+text = "Tempo restante: "
+label_settings = SubResource("LabelSettings_00yp6")
+horizontal_alignment = 1
+
+[node name="LabelFinal" type="Label" parent="VBoxContainer4"]
+layout_mode = 2
+text = "Pontuação final: "
+label_settings = SubResource("LabelSettings_00yp6")
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -131.0
+offset_right = 265.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer3/HBoxContainer"]
+position = Vector2(-32, 14)
+scale = Vector2(3, 3)
+texture = ExtResource("4_00yp6")
+
+[node name="LabelCristalP" type="Label" parent="VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "x 0"
+label_settings = SubResource("LabelSettings_b4267")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer3"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer3/HBoxContainer2"]
+position = Vector2(-32, 14)
+scale = Vector2(3, 3)
+texture = ExtResource("5_brcxn")
+
+[node name="LabelCristalM" type="Label" parent="VBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "x 0"
+label_settings = SubResource("LabelSettings_b4267")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer3/HBoxContainer3"]
+position = Vector2(-32, 14)
+scale = Vector2(3, 3)
+texture = ExtResource("6_d2wlh")
+
+[node name="LabelCristalR" type="Label" parent="VBoxContainer3/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "x 0"
+label_settings = SubResource("LabelSettings_b4267")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -968,10 +1071,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.0
-offset_top = 10.5
-offset_right = 33.0
-offset_bottom = 111.5
+offset_left = -63.0
+offset_top = 173.0
+offset_right = 64.0
+offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
 

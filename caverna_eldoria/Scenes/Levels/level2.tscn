@@ -5053,7 +5053,7 @@ position = Vector2(1204, -124)
 offset = Vector2(200, 0)
 
 [node name="Player" parent="." instance=ExtResource("10_jywle")]
-position = Vector2(120, -28)
+position = Vector2(113, -17)
 camera_bounds = Vector4(0, -207, 1683, 60)
 
 [node name="Parallax2D4" type="Parallax2D" parent="."]

@@ -14,7 +14,8 @@ func _process(delta):
 
 
 func _on_countdown_timer_timeout() -> void:
-	if Global.current_time > 0:
-		Global.current_time -= 1
-	else:
-		get_parent().get_parent().die()
+	if not Global.game_end:
+		if Global.current_time > 0:
+			Global.current_time -= 1
+		else:
+			get_parent().get_parent().die()
