@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://df0h4a61pr744"]
+
+[ext_resource type="Script" uid="uid://ck35bi6vpgssv" path="res://Scripts/score_board.gd" id="1_thdbx"]
+[ext_resource type="Texture2D" uid="uid://dkhrg4nqbhy4i" path="res://Assets/Backgrounds/background1.png" id="2_thdbx"]
+[ext_resource type="Texture2D" uid="uid://bi4nsgxb86k7i" path="res://Assets/Backgrounds/background3.png" id="3_esdii"]
+[ext_resource type="Texture2D" uid="uid://dnfdwcdd5turi" path="res://Assets/Backgrounds/background4a.png" id="4_43ftw"]
+[ext_resource type="FontFile" uid="uid://boumi2qgas3nm" path="res://Assets/Fonts/Font.ttf" id="5_esdii"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_43ftw"]
+font = ExtResource("5_esdii")
+font_size = 37
+
+[sub_resource type="Theme" id="Theme_thdbx"]
+default_base_scale = 1.0
+default_font = ExtResource("5_esdii")
+default_font_size = 16
+
+[node name="Ranking" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_thdbx")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.5, 1)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-5, 0)
+repeat_times = 7
+
+[node name="Background1" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(384, -46)
+scale = Vector2(2, 2)
+texture = ExtResource("2_thdbx")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.7, 1)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-7, 0)
+repeat_times = 7
+
+[node name="Background3" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(384, -46)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_esdii")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_offset = Vector2(0, 401)
+repeat_size = Vector2(768, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 7
+
+[node name="Background4a" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(384, -46)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_43ftw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 39.0
+offset_right = 110.0
+offset_bottom = 104.0
+grow_horizontal = 2
+text = "Ranking"
+label_settings = SubResource("LabelSettings_43ftw")
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="."]
+custom_minimum_size = Vector2(350, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -142.0
+offset_right = 175.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_thdbx")
+placeholder_text = "Rankings dos jogadores"
+editable = false
+selecting_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -141.0
+offset_right = 28.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Voltar"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -5,11 +5,13 @@ extends Node2D
 
 @onready var animatable_body_2d: AnimatableBody2D = $AnimatableBody2D
 
+var tween
+
 func _ready():
 	start_tween()
 
 func start_tween():
-	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_loops().set_parallel(false)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)

@@ -9,8 +9,8 @@ func _process(delta):
 	
 	var seconds = "%s%d"%["" if time % 60 >= 10 else "0", time % 60]
 	
-	label_tempo.text = "%d:%s"%[time/60, seconds]
-	label_pontos.text = "Pontos: %d"%Global.pontos
+	label_tempo.text = "%d:%s" % [time/60, seconds]
+	label_pontos.text = "Pontos: %d" % Global.pontos
 
 
 func _on_countdown_timer_timeout() -> void:

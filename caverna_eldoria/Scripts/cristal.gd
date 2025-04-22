@@ -20,6 +20,9 @@ func _ready():
 		1:
 			valor = 25
 			sprite_2d.texture = load("res://Assets/Pegaveis/Cristal_grande.png")
+		2:
+			valor = 50
+			sprite_2d.texture = load("res://Assets/Pegaveis/Cristal_raro.png")
 
 
 func start_tween():

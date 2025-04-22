@@ -80,6 +80,10 @@ text = "Iniciar
 layout_mode = 2
 text = "Opções"
 
+[node name="ButtonScoreboard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ranking"
+
 [node name="ButtonSair" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Sair"
@@ -100,4 +104,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/ButtonComecar" to="." method="_on_button_comecar_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonScoreboard" to="." method="_on_button_scoreboard_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonSair" to="." method="_on_button_sair_pressed"]

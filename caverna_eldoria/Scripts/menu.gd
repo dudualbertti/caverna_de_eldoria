@@ -1,16 +1,17 @@
 extends Control
 
-var my_music_stream
-
 
 func _ready() -> void:
-	my_music_stream = preload("res://Assets/Sounds/soundtrack.ogg")
-	Audio.play_music(my_music_stream)
+	Global.pontos = 0
 
 
 func _on_button_comecar_pressed() -> void:
-	Global.goto_scene("res://Scenes/Levels/level1.tscn")
+	Global.goto_scene("res://Scenes/Menus/escolher_nome.tscn")
 
 
 func _on_button_sair_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_button_scoreboard_pressed() -> void:
+	Global.goto_scene("res://Scenes/Menus/score_board.tscn")
